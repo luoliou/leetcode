@@ -1,0 +1,46 @@
+编写代码，移除未排序链表中的重复节点。保留最开始出现的节点。
+
+示例1:
+
+ 输入：[1, 2, 3, 3, 2, 1]
+ 输出：[1, 2, 3]
+
+示例2:
+
+ 输入：[1, 1, 1, 1, 2]
+ 输出：[1, 2]
+
+
+
+
+
+
+
+class Solution
+{
+    public:
+    ListNode* removeDuplicateNodes(ListNode* head)
+    {
+        if(head==NULL||head->next==NULL)
+        {
+            return head;
+        }
+        ListNode *fast=head,*slow=head;
+        while(slow)
+        {
+            while(fast->next)//fast要判断后面的元素跟他是不是一样的，所以的判断next指向的是不是NULL
+            {
+                if(fast->next->val==slow->val)
+                {
+                    fast->next=fast->next->next;//要删除节点，所以fast必须得在前面一点，fast作为一只狗，他的任务还没有结束，所以还的要草他，因此是fast移动而不是slow移动
+                }
+                else{
+                    fast=fast->next;
+                }
+            }
+            slow=slow->next;
+            fast=slow;
+        }
+        return head;
+    } 
+};
